@@ -1,0 +1,63 @@
+# SnapLog Cursor Rules
+
+## Project Overview
+
+SnapLog is a local-first photo journal built with Expo (React Native) and TypeScript. It uses SQLite for persistence, Zustand for state, and Expo Router for navigation.
+
+## Code Style
+
+- TypeScript strict mode. No `any` types.
+- Functional components only. No class components.
+- Use `StyleSheet.create()` for all styles. No inline style objects.
+- Active voice in comments. Short sentences.
+- No em dashes. Use hyphens, commas, or periods.
+
+## Architecture
+
+- **Screens** live in `app/` using Expo Router file-based routing
+- **Reusable components** live in `components/`
+- **Business logic** (database, store, API clients) lives in `lib/`
+- **Design tokens** (colors, spacing, typography) live in `constants/theme.ts`
+- The Zustand store in `lib/store.ts` is the single source of truth. SQLite is the persistence layer.
+
+## Dependencies
+
+- Prefer Expo SDK libraries over community packages
+- Install with `npx expo install` to get compatible versions
+- Do not add packages without a clear reason
+
+## State Management
+
+- Global state: Zustand (`lib/store.ts`)
+- DB operations: `lib/database.ts` (SQLite)
+- No Redux, no Context API for app state
+
+## Naming
+
+- Components: PascalCase (`EntryCard.tsx`)
+- Utilities/hooks: camelCase (`usePhotoCapture.ts`)
+- Constants: camelCase file, UPPER_CASE for values if truly constant
+- Database columns: snake_case
+- TypeScript interfaces: PascalCase, no `I` prefix
+
+## Accessibility
+
+- Every interactive element needs `accessibilityLabel`
+- Touchable areas minimum 44x44 points
+- Do not rely on color alone to convey state
+
+## Performance
+
+- Use `React.memo` for list item components
+- FlatList over ScrollView for lists
+- Avoid re-renders: no inline functions in render, no object literals in props
+
+## Security
+
+- Never commit `.env` files
+- API keys go in `.env` with `EXPO_PUBLIC_` prefix
+- No secrets in `app.json` or source code
+
+## Built With
+
+This app was built using the [Mobile App Developer Tools](https://github.com/TMHSDigital/Mobile-App-Developer-Tools) Cursor plugin.

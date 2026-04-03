@@ -1,6 +1,26 @@
-# SnapLog
+<p align="center">
+  <img src="assets/icon.png" alt="SnapLog" width="100" height="100" />
+</p>
 
-A minimalist photo journal for capturing one moment a day.
+<h1 align="center">SnapLog</h1>
+
+<p align="center">
+  A minimalist photo journal for capturing one moment a day.
+</p>
+
+<p align="center">
+  <a href="https://github.com/TMHSDigital/Demo-Mobile-App/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/TMHSDigital/Demo-Mobile-App/ci.yml?branch=main&style=flat-square&label=CI" alt="CI" /></a>
+  <img src="https://img.shields.io/badge/Expo_SDK-54-4630EB?style=flat-square&logo=expo" alt="Expo SDK 54" />
+  <img src="https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/platform-iOS%20%7C%20Android-lightgrey?style=flat-square" alt="Platform" />
+  <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT License" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/TMHSDigital/Mobile-App-Developer-Tools"><img src="https://img.shields.io/badge/built_with-Mobile_App_Dev_Tools-0A84FF?style=flat-square&logo=cursor" alt="Built with Mobile App Developer Tools" /></a>
+</p>
+
+---
 
 SnapLog is a local-first photo diary built with Expo and React Native. Take a photo, add a caption, and build a visual timeline of your life. Everything stays on your device -- no accounts, no cloud, no complexity. Optional AI-powered photo descriptions are available when an OpenAI API key is configured.
 
@@ -30,8 +50,8 @@ SnapLog is a local-first photo diary built with Expo and React Native. Take a ph
 
 ### Prerequisites
 
-- Node.js 18+
-- Expo CLI (`npm install -g expo-cli` or use `npx expo`)
+- Node.js 20+
+- Expo CLI (`npx expo`)
 - iOS Simulator (macOS) or Android Emulator, or Expo Go on a physical device
 
 ### Install and Run
@@ -52,9 +72,7 @@ Scan the QR code with Expo Go, or press `i` for iOS Simulator / `a` for Android 
 3. Scan the QR code from the terminal output
 4. For a development build with full native module access, run `npx expo run:ios` or `npx expo run:android`
 
-## Optional Features
-
-### AI Photo Descriptions
+## Optional: AI Photo Descriptions
 
 SnapLog can generate short, journal-style descriptions of your photos using OpenAI Vision.
 
@@ -65,7 +83,7 @@ SnapLog can generate short, journal-style descriptions of your photos using Open
    ```
 3. Restart the dev server
 
-An "AI Describe" button will appear on the photo preview screen when the key is configured.
+An "AI Describe" button appears on the photo preview screen when the key is configured.
 
 ## Architecture
 
@@ -91,7 +109,7 @@ Data flows from the camera through `PhotoPreview` (which copies photos to the do
 
 ## Skills Used
 
-This app demonstrates the capabilities of the [Mobile App Developer Tools](https://github.com/TMHSDigital/Mobile-App-Developer-Tools) Cursor plugin.
+This app was built using the [Mobile App Developer Tools](https://github.com/TMHSDigital/Mobile-App-Developer-Tools) Cursor plugin. It exercises 12 of the 20 skills:
 
 | Skill | Where in the app |
 |-------|-----------------|
@@ -110,4 +128,4 @@ This app demonstrates the capabilities of the [Mobile App Developer Tools](https
 
 ## License
 
-MIT
+[MIT](LICENSE)
