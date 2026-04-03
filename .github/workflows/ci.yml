@@ -38,5 +38,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check for TypeScript errors
-        run: npx tsc --noEmit
+      - name: Lint
+        run: npx expo lint

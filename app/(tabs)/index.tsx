@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -23,13 +23,20 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
 export default function JournalScreen() {
   const entries = useStore((s) => s.entries);
   const loadEntries = useStore((s) => s.loadEntries);
+  const prevCount = useRef(entries.length);
 
   useFocusEffect(
     useCallback(() => {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
       loadEntries();
-    }, [])
+    }, [loadEntries])
   );
+
+  useEffect(() => {
+    if (prevCount.current !== entries.length) {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      prevCount.current = entries.length;
+    }
+  }, [entries.length]);
 
   if (entries.length === 0) {
     return (

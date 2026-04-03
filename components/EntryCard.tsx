@@ -1,5 +1,11 @@
 import { memo } from "react";
-import { Pressable, View, Text, StyleSheet, Dimensions } from "react-native";
+import {
+  Pressable,
+  View,
+  Text,
+  StyleSheet,
+  useWindowDimensions,
+} from "react-native";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { JournalEntry } from "../lib/types";
@@ -7,8 +13,6 @@ import { colors, spacing, radius, typography } from "../constants/theme";
 
 const COLUMN_GAP = spacing.md;
 const PADDING = spacing.lg;
-const SCREEN_WIDTH = Dimensions.get("window").width;
-const CARD_WIDTH = (SCREEN_WIDTH - PADDING * 2 - COLUMN_GAP) / 2;
 
 function formatDate(iso: string): string {
   const d = new Date(iso);
@@ -21,16 +25,18 @@ interface EntryCardProps {
 
 function EntryCard({ entry }: EntryCardProps) {
   const router = useRouter();
+  const { width: screenWidth } = useWindowDimensions();
+  const cardWidth = (screenWidth - PADDING * 2 - COLUMN_GAP) / 2;
 
   return (
     <Pressable
       onPress={() => router.push(`/entry/${entry.id}`)}
-      style={styles.card}
+      style={[styles.card, { width: cardWidth }]}
       accessibilityLabel={`Journal entry from ${formatDate(entry.createdAt)}`}
     >
       <Image
         source={{ uri: entry.photoUri }}
-        style={styles.thumbnail}
+        style={[styles.thumbnail, { height: cardWidth }]}
         contentFit="cover"
         transition={200}
       />
@@ -53,7 +59,6 @@ export default memo(EntryCard);
 
 const styles = StyleSheet.create({
   card: {
-    width: CARD_WIDTH,
     backgroundColor: colors.surface,
     borderRadius: radius.md,
     overflow: "hidden",
@@ -66,7 +71,6 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     width: "100%",
-    height: CARD_WIDTH,
     backgroundColor: colors.border,
   },
   info: {

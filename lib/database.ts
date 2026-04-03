@@ -45,27 +45,3 @@ export async function deleteEntry(id: string): Promise<void> {
   await db.runAsync("DELETE FROM entries WHERE id = ?", id);
 }
 
-export async function updateEntry(
-  id: string,
-  fields: Partial<Pick<JournalEntry, "caption" | "aiDescription">>
-): Promise<void> {
-  const sets: string[] = [];
-  const values: (string | null)[] = [];
-
-  if (fields.caption !== undefined) {
-    sets.push("caption = ?");
-    values.push(fields.caption);
-  }
-  if (fields.aiDescription !== undefined) {
-    sets.push("aiDescription = ?");
-    values.push(fields.aiDescription);
-  }
-
-  if (sets.length === 0) return;
-
-  values.push(id);
-  await db.runAsync(
-    `UPDATE entries SET ${sets.join(", ")} WHERE id = ?`,
-    ...values
-  );
-}

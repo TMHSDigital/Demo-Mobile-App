@@ -2,8 +2,10 @@ import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import { Platform } from "react-native";
 
-export async function registerForPushNotifications(): Promise<string | null> {
-  if (!Device.isDevice) return null;
+const REMINDER_ID = "snaplog-daily-reminder";
+
+export async function requestNotificationPermissions(): Promise<boolean> {
+  if (!Device.isDevice) return false;
 
   const { status: existingStatus } =
     await Notifications.getPermissionsAsync();
@@ -13,7 +15,8 @@ export async function registerForPushNotifications(): Promise<string | null> {
     const { status } = await Notifications.requestPermissionsAsync();
     finalStatus = status;
   }
-  if (finalStatus !== "granted") return null;
+
+  if (finalStatus !== "granted") return false;
 
   if (Platform.OS === "android") {
     await Notifications.setNotificationChannelAsync("daily-reminder", {
@@ -22,8 +25,7 @@ export async function registerForPushNotifications(): Promise<string | null> {
     });
   }
 
-  const token = await Notifications.getExpoPushTokenAsync();
-  return token.data;
+  return true;
 }
 
 export async function scheduleDailyReminder(
@@ -33,6 +35,7 @@ export async function scheduleDailyReminder(
   await cancelDailyReminder();
 
   await Notifications.scheduleNotificationAsync({
+    identifier: REMINDER_ID,
     content: {
       title: "SnapLog",
       body: "Time to capture today's moment",
@@ -48,7 +51,9 @@ export async function scheduleDailyReminder(
 }
 
 export async function cancelDailyReminder(): Promise<void> {
-  await Notifications.cancelAllScheduledNotificationsAsync();
+  await Notifications.cancelScheduledNotificationAsync(REMINDER_ID).catch(
+    () => {}
+  );
 }
 
 export function configureNotificationHandler(): void {

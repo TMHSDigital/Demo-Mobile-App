@@ -5,10 +5,10 @@ import {
   ScrollView,
   Alert,
   StyleSheet,
-  Share,
   SafeAreaView,
 } from "react-native";
 import { Image } from "expo-image";
+import * as Sharing from "expo-sharing";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { getEntry } from "../../lib/database";
 import { useStore } from "../../lib/store";
@@ -58,9 +58,10 @@ export default function EntryDetailScreen() {
   const handleShare = async () => {
     if (!entry) return;
     try {
-      await Share.share({
-        message: entry.caption || "Check out my SnapLog entry!",
-      });
+      const canShare = await Sharing.isAvailableAsync();
+      if (canShare) {
+        await Sharing.shareAsync(entry.photoUri);
+      }
     } catch {
       // user cancelled
     }

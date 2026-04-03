@@ -30,6 +30,11 @@ graph TD
     Store -->|"entries[]"| Feed["Journal Feed"]
     Feed -->|"router.push()"| Detail["Entry Detail"]
     Detail -->|"removeEntry()"| Store
+    Store -->|"deleteAsync(photoUri)"| FileSystem
+
+    Settings["Settings Screen"] -->|"updateSettings()"| Store
+    Store -->|"setItemAsync()"| SecureStore["SecureStore"]
+    SecureStore -->|"getItemAsync()"| Store
 
     AI["OpenAI Vision API"] -.->|"optional"| Preview
 ```
@@ -46,7 +51,11 @@ graph TD
 | aiDescription | TEXT | nullable |
 | createdAt | TEXT | NOT NULL (ISO 8601) |
 
-Photos are stored in the app's document directory at `{documentDirectory}photos/{id}.{ext}`. This ensures they persist across app restarts and aren't cleaned up by the OS cache purge.
+Photos are stored in the app's document directory at `{documentDirectory}photos/{id}.{ext}`. This ensures they persist across app restarts and aren't cleaned up by the OS cache purge. When an entry is deleted, its photo file is also removed from disk.
+
+### Settings persistence
+
+App settings (reminder toggle and time) are stored in `expo-secure-store` under the key `snaplog_settings`. Settings are loaded on app startup and written on every update.
 
 ## Future Enhancements
 

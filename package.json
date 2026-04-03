@@ -1,6 +1,6 @@
 {
   "name": "snaplog",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "index.ts",
   "scripts": {
     "start": "expo start",
@@ -13,6 +13,7 @@
     "expo": "~54.0.33",
     "expo-camera": "~17.0.10",
     "expo-constants": "~18.0.13",
+    "expo-crypto": "~15.0.8",
     "expo-device": "~8.0.10",
     "expo-file-system": "~19.0.21",
     "expo-image": "~3.0.11",

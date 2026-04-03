@@ -24,6 +24,19 @@
 
 SnapLog is a local-first photo diary built with Expo and React Native. Take a photo, add a caption, and build a visual timeline of your life. Everything stays on your device -- no accounts, no cloud, no complexity. Optional AI-powered photo descriptions are available when an OpenAI API key is configured.
 
+## What's New in 0.2.0
+
+- **Settings persistence** -- reminder preferences now survive app restarts via SecureStore
+- **Error recovery** -- graceful error UI when database initialization fails instead of hanging
+- **Storage cleanup** -- photo files are deleted from disk when entries are removed
+- **Photo sharing** -- share now sends the actual image instead of just text
+- **Expo Go support** -- camera screen gracefully degrades with a clear message in Expo Go
+- **Targeted notifications** -- daily reminder uses a specific identifier instead of cancelling all notifications
+- **Responsive layout** -- journal grid adapts to screen size changes and split view
+- **Stronger IDs** -- entry IDs use `expo-crypto` UUID instead of timestamp-based generation
+- **CI improvements** -- lint job now runs `expo lint` instead of duplicating type-check
+- **Plugin config** -- `expo-camera` and `expo-notifications` added to app.json plugins
+
 ## Features
 
 - **Daily photo capture** with front/back camera and flash control
@@ -53,6 +66,7 @@ SnapLog is a local-first photo diary built with Expo and React Native. Take a ph
 - Node.js 20+
 - Expo CLI (`npx expo`)
 - iOS Simulator (macOS) or Android Emulator, or Expo Go on a physical device
+- For full native features (camera, notifications): a [development build](https://docs.expo.dev/develop/development-builds/introduction/) via `npx expo run:ios` or `npx expo run:android`
 
 ### Install and Run
 

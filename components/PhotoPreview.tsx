@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { Image } from "expo-image";
 import * as FileSystem from "expo-file-system/legacy";
+import * as Crypto from "expo-crypto";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useStore } from "../lib/store";
@@ -42,7 +43,7 @@ export default function PhotoPreview({ photoUri, onRetake }: PhotoPreviewProps) 
     setSaving(true);
 
     try {
-      const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      const id = Crypto.randomUUID();
       const ext = photoUri.split(".").pop() || "jpg";
       const destDir = `${FileSystem.documentDirectory}photos/`;
       await FileSystem.makeDirectoryAsync(destDir, { intermediates: true });

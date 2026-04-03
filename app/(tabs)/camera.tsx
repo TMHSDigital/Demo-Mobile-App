@@ -7,11 +7,14 @@ import {
   Text,
 } from "react-native";
 import { CameraView, CameraType, FlashMode } from "expo-camera";
+import Constants from "expo-constants";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "expo-router";
-import { colors, radius } from "../../constants/theme";
+import { colors, radius, spacing, typography } from "../../constants/theme";
 import { requestCameraPermission } from "../../lib/permissions";
 import PhotoPreview from "../../components/PhotoPreview";
+
+const isExpoGo = Constants.appOwnership === "expo";
 
 export default function CameraScreen() {
   const cameraRef = useRef<CameraView>(null);
@@ -22,6 +25,7 @@ export default function CameraScreen() {
 
   useFocusEffect(
     useCallback(() => {
+      if (isExpoGo) return;
       let mounted = true;
       requestCameraPermission().then((granted) => {
         if (mounted) setHasPermission(granted);
@@ -31,6 +35,18 @@ export default function CameraScreen() {
       };
     }, [])
   );
+
+  if (isExpoGo) {
+    return (
+      <View style={styles.container}>
+        <Ionicons name="build-outline" size={48} color={colors.textSecondary} />
+        <Text style={styles.message}>Camera requires a development build</Text>
+        <Text style={styles.submessage}>
+          Run "npx expo run:ios" or "npx expo run:android" to test the camera.
+        </Text>
+      </View>
+    );
+  }
 
   const takePicture = async () => {
     if (!cameraRef.current) return;
@@ -121,6 +137,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   message: { color: colors.textSecondary, fontSize: 16, marginTop: 12 },
+  submessage: {
+    color: colors.textSecondary,
+    fontSize: 13,
+    marginTop: spacing.sm,
+    textAlign: "center",
+    paddingHorizontal: spacing.xxxl,
+    lineHeight: 18,
+  },
   camera: { flex: 1, width: "100%" },
   overlay: {
     flex: 1,

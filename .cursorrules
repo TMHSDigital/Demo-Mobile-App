@@ -7,7 +7,7 @@ SnapLog is a local-first photo journal built with Expo (React Native) and TypeSc
 ## Code Style
 
 - TypeScript strict mode. No `any` types.
-- Functional components only. No class components.
+- Functional components only. No class components (exception: `ErrorBoundary` requires a class component - React has no hook equivalent).
 - Use `StyleSheet.create()` for all styles. No inline style objects.
 - Active voice in comments. Short sentences.
 - No em dashes. Use hyphens, commas, or periods.

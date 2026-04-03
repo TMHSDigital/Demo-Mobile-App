@@ -17,7 +17,7 @@ import { colors, spacing, radius, typography } from "../../constants/theme";
 import {
   scheduleDailyReminder,
   cancelDailyReminder,
-  registerForPushNotifications,
+  requestNotificationPermissions,
 } from "../../lib/notifications";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -62,7 +62,7 @@ export default function SettingsScreen() {
 
   const toggleReminder = async (enabled: boolean) => {
     if (enabled) {
-      await registerForPushNotifications();
+      await requestNotificationPermissions();
       await scheduleDailyReminder(hour, minute);
     } else {
       await cancelDailyReminder();
