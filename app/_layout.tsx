@@ -3,6 +3,9 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { initDatabase } from "../lib/database";
 import { useStore } from "../lib/store";
+import { configureNotificationHandler } from "../lib/notifications";
+
+configureNotificationHandler();
 
 export default function RootLayout() {
   const [dbReady, setDbReady] = useState(false);
