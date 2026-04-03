@@ -13,6 +13,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { getEntry } from "../../lib/database";
 import { useStore } from "../../lib/store";
 import { JournalEntry } from "../../lib/types";
+import { colors, spacing, radius, typography } from "../../constants/theme";
 import IconButton from "../../components/IconButton";
 
 function formatDateTime(iso: string): string {
@@ -91,7 +92,7 @@ export default function EntryDetailScreen() {
           />
           <IconButton
             name="trash-outline"
-            color="#EF4444"
+            color={colors.danger}
             onPress={handleDelete}
             accessibilityLabel="Delete entry"
           />
@@ -129,55 +130,54 @@ export default function EntryDetailScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#FFFBF5" },
+  container: { flex: 1, backgroundColor: colors.background },
   loading: { flex: 1, justifyContent: "center", alignItems: "center" },
-  loadingText: { color: "#9CA3AF", fontSize: 16 },
+  loadingText: { color: colors.textSecondary, ...typography.body },
   topBar: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
   },
-  topBarActions: { flexDirection: "row", gap: 4 },
-  content: { paddingBottom: 40 },
+  topBarActions: { flexDirection: "row", gap: spacing.xs },
+  content: { paddingBottom: spacing.xxxl },
   photo: {
     width: "100%",
     aspectRatio: 1,
-    backgroundColor: "#F3E8D8",
+    backgroundColor: colors.border,
   },
   details: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingHorizontal: spacing.xl,
+    paddingTop: spacing.xl,
   },
   date: {
-    fontSize: 13,
-    color: "#9CA3AF",
-    marginBottom: 8,
+    ...typography.caption,
+    color: colors.textSecondary,
+    marginBottom: spacing.sm,
   },
   caption: {
     fontSize: 18,
-    color: "#1F2937",
+    color: colors.text,
     lineHeight: 26,
-    marginBottom: 16,
+    marginBottom: spacing.lg,
   },
   aiSection: {
-    backgroundColor: "#FEF3C7",
-    borderRadius: 12,
-    padding: 16,
-    marginTop: 8,
+    backgroundColor: colors.accentLight,
+    borderRadius: radius.md,
+    padding: spacing.lg,
+    marginTop: spacing.sm,
   },
   aiLabel: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: "#D97706",
+    ...typography.micro,
+    color: colors.accent,
     textTransform: "uppercase",
     letterSpacing: 0.5,
-    marginBottom: 8,
+    marginBottom: spacing.sm,
   },
   aiText: {
-    fontSize: 14,
-    color: "#78350F",
+    ...typography.bodySmall,
+    color: colors.accentDark,
     lineHeight: 20,
   },
 });

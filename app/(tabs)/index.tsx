@@ -1,10 +1,24 @@
 import { useCallback } from "react";
-import { FlatList, StyleSheet, SafeAreaView, View, Text } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  SafeAreaView,
+  View,
+  Text,
+  LayoutAnimation,
+  UIManager,
+  Platform,
+} from "react-native";
 import { useFocusEffect } from "expo-router";
 import { useStore } from "../../lib/store";
 import { JournalEntry } from "../../lib/types";
+import { colors, spacing, typography } from "../../constants/theme";
 import EntryCard from "../../components/EntryCard";
 import EmptyState from "../../components/EmptyState";
+
+if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 export default function JournalScreen() {
   const entries = useStore((s) => s.entries);
@@ -12,6 +26,7 @@ export default function JournalScreen() {
 
   useFocusEffect(
     useCallback(() => {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
       loadEntries();
     }, [])
   );
@@ -45,20 +60,19 @@ export default function JournalScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#FFFBF5" },
+  container: { flex: 1, backgroundColor: colors.background },
   header: {
-    paddingHorizontal: 16,
-    paddingTop: 8,
-    paddingBottom: 12,
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.sm,
+    paddingBottom: spacing.md,
   },
   headerTitle: {
-    fontSize: 28,
-    fontWeight: "700",
-    color: "#1F2937",
+    ...typography.h1,
+    color: colors.text,
   },
   list: {
-    paddingHorizontal: 16,
-    paddingBottom: 20,
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.xl,
   },
   row: {
     justifyContent: "space-between",

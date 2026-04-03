@@ -9,6 +9,7 @@ import {
 import { CameraView, CameraType, FlashMode } from "expo-camera";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "expo-router";
+import { colors, radius } from "../../constants/theme";
 import { requestCameraPermission } from "../../lib/permissions";
 import PhotoPreview from "../../components/PhotoPreview";
 
@@ -59,7 +60,7 @@ export default function CameraScreen() {
   if (!hasPermission) {
     return (
       <View style={styles.container}>
-        <Ionicons name="camera-off-outline" size={48} color="#9CA3AF" />
+        <Ionicons name="camera-off-outline" size={48} color={colors.textSecondary} />
         <Text style={styles.message}>Camera access is required</Text>
       </View>
     );
@@ -83,7 +84,7 @@ export default function CameraScreen() {
               <Ionicons
                 name={flash === "off" ? "flash-off" : "flash"}
                 size={24}
-                color="#fff"
+                color={colors.white}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -93,7 +94,7 @@ export default function CameraScreen() {
               style={styles.controlButton}
               accessibilityLabel="Flip camera"
             >
-              <Ionicons name="camera-reverse-outline" size={24} color="#fff" />
+              <Ionicons name="camera-reverse-outline" size={24} color={colors.white} />
             </TouchableOpacity>
           </View>
 
@@ -115,11 +116,11 @@ export default function CameraScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000",
+    backgroundColor: colors.black,
     justifyContent: "center",
     alignItems: "center",
   },
-  message: { color: "#9CA3AF", fontSize: 16, marginTop: 12 },
+  message: { color: colors.textSecondary, fontSize: 16, marginTop: 12 },
   camera: { flex: 1, width: "100%" },
   overlay: {
     flex: 1,
@@ -134,8 +135,8 @@ const styles = StyleSheet.create({
   controlButton: {
     width: 44,
     height: 44,
-    borderRadius: 22,
-    backgroundColor: "rgba(0,0,0,0.3)",
+    borderRadius: radius.lg,
+    backgroundColor: colors.overlayLight,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
     height: 72,
     borderRadius: 36,
     borderWidth: 4,
-    borderColor: "#fff",
+    borderColor: colors.white,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -156,6 +157,6 @@ const styles = StyleSheet.create({
     width: 58,
     height: 58,
     borderRadius: 29,
-    backgroundColor: "#fff",
+    backgroundColor: colors.white,
   },
 });

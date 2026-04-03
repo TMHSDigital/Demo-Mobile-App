@@ -1,13 +1,14 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { colors, spacing, typography, radius } from "../constants/theme";
 
 export default function EmptyState() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <Ionicons name="images-outline" size={64} color="#D4C5A9" />
+      <Ionicons name="images-outline" size={64} color={colors.border} />
       <Text style={styles.title}>Your journal is empty</Text>
       <Text style={styles.subtitle}>
         Capture your first moment to start building your visual diary.
@@ -17,7 +18,7 @@ export default function EmptyState() {
         style={styles.button}
         accessibilityLabel="Take your first photo"
       >
-        <Ionicons name="camera" size={20} color="#fff" />
+        <Ionicons name="camera" size={20} color={colors.white} />
         <Text style={styles.buttonText}>Take your first photo</Text>
       </TouchableOpacity>
     </View>
@@ -29,34 +30,33 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 40,
+    paddingHorizontal: spacing.xxxl,
   },
   title: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: "#1F2937",
-    marginTop: 20,
-    marginBottom: 8,
+    ...typography.h2,
+    color: colors.text,
+    marginTop: spacing.xl,
+    marginBottom: spacing.sm,
   },
   subtitle: {
     fontSize: 15,
-    color: "#9CA3AF",
+    color: colors.textSecondary,
     textAlign: "center",
     lineHeight: 22,
-    marginBottom: 28,
+    marginBottom: spacing.xxl,
   },
   button: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#D97706",
+    backgroundColor: colors.accent,
     paddingHorizontal: 24,
     paddingVertical: 14,
-    borderRadius: 12,
-    gap: 8,
+    borderRadius: radius.md,
+    gap: spacing.sm,
   },
   buttonText: {
-    color: "#fff",
+    color: colors.white,
     fontWeight: "600",
-    fontSize: 16,
+    ...typography.body,
   },
 });

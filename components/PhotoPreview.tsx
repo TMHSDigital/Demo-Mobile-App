@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useStore } from "../lib/store";
 import { isAIEnabled, describePhoto } from "../lib/ai";
+import { colors, spacing, radius } from "../constants/theme";
 
 interface PhotoPreviewProps {
   photoUri: string;
@@ -73,7 +74,7 @@ export default function PhotoPreview({ photoUri, onRetake }: PhotoPreviewProps) 
         <TextInput
           style={styles.captionInput}
           placeholder="Add a caption..."
-          placeholderTextColor="#9CA3AF"
+          placeholderTextColor={colors.textSecondary}
           value={caption}
           onChangeText={setCaption}
           maxLength={280}
@@ -104,10 +105,10 @@ export default function PhotoPreview({ photoUri, onRetake }: PhotoPreviewProps) 
               accessibilityLabel="Generate AI description"
             >
               {aiLoading ? (
-                <ActivityIndicator color="#D97706" size="small" />
+                <ActivityIndicator color={colors.accent} size="small" />
               ) : (
                 <>
-                  <Ionicons name="sparkles" size={16} color="#D97706" />
+                  <Ionicons name="sparkles" size={16} color={colors.accent} />
                   <Text style={styles.aiButtonText}>AI Describe</Text>
                 </>
               )}
@@ -131,65 +132,66 @@ export default function PhotoPreview({ photoUri, onRetake }: PhotoPreviewProps) 
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#000" },
+  container: { flex: 1, backgroundColor: colors.black },
   photo: { flex: 1, width: "100%" },
   controls: {
     position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
-    paddingHorizontal: 20,
+    paddingHorizontal: spacing.xl,
     paddingBottom: 40,
-    paddingTop: 16,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    paddingTop: spacing.lg,
+    backgroundColor: colors.overlay,
   },
   captionInput: {
-    backgroundColor: "rgba(255,255,255,0.15)",
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    color: "#fff",
+    backgroundColor: colors.cameraControlBg,
+    borderRadius: radius.md,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
+    color: colors.white,
     fontSize: 16,
-    marginBottom: 16,
+    marginBottom: spacing.lg,
     maxHeight: 100,
   },
   buttons: {
     flexDirection: "row",
-    gap: 12,
+    gap: spacing.md,
   },
   button: {
     flex: 1,
     paddingVertical: 14,
-    borderRadius: 12,
+    borderRadius: radius.md,
     alignItems: "center",
   },
   retakeButton: {
-    backgroundColor: "rgba(255,255,255,0.2)",
+    backgroundColor: colors.cameraControlBg,
   },
   saveButton: {
-    backgroundColor: "#D97706",
+    backgroundColor: colors.accent,
   },
-  retakeText: { color: "#fff", fontWeight: "600", fontSize: 16 },
+  retakeText: { color: colors.white, fontWeight: "600", fontSize: 16 },
   aiButton: {
-    backgroundColor: "rgba(255,255,255,0.15)",
+    backgroundColor: colors.cameraControlBg,
     flexDirection: "row",
     gap: 6,
+    justifyContent: "center",
   },
-  aiButtonText: { color: "#D97706", fontWeight: "600", fontSize: 14 },
+  aiButtonText: { color: colors.accent, fontWeight: "600", fontSize: 14 },
   aiPreview: {
     backgroundColor: "rgba(254,243,199,0.2)",
     borderRadius: 10,
-    padding: 12,
-    marginBottom: 12,
+    padding: spacing.md,
+    marginBottom: spacing.md,
   },
   aiLabel: {
     fontSize: 10,
     fontWeight: "700",
-    color: "#D97706",
+    color: colors.accent,
     textTransform: "uppercase",
     letterSpacing: 0.5,
-    marginBottom: 4,
+    marginBottom: spacing.xs,
   },
-  aiText: { fontSize: 13, color: "#fff", lineHeight: 18 },
-  saveText: { color: "#fff", fontWeight: "600", fontSize: 16 },
+  aiText: { fontSize: 13, color: colors.white, lineHeight: 18 },
+  saveText: { color: colors.white, fontWeight: "600", fontSize: 16 },
 });

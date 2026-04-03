@@ -1,10 +1,12 @@
+import { memo } from "react";
 import { Pressable, View, Text, StyleSheet, Dimensions } from "react-native";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { JournalEntry } from "../lib/types";
+import { colors, spacing, radius, typography } from "../constants/theme";
 
-const COLUMN_GAP = 12;
-const PADDING = 16;
+const COLUMN_GAP = spacing.md;
+const PADDING = spacing.lg;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const CARD_WIDTH = (SCREEN_WIDTH - PADDING * 2 - COLUMN_GAP) / 2;
 
@@ -17,7 +19,7 @@ interface EntryCardProps {
   entry: JournalEntry;
 }
 
-export default function EntryCard({ entry }: EntryCardProps) {
+function EntryCard({ entry }: EntryCardProps) {
   const router = useRouter();
 
   return (
@@ -47,13 +49,15 @@ export default function EntryCard({ entry }: EntryCardProps) {
   );
 }
 
+export default memo(EntryCard);
+
 const styles = StyleSheet.create({
   card: {
     width: CARD_WIDTH,
-    backgroundColor: "#fff",
-    borderRadius: 12,
+    backgroundColor: colors.surface,
+    borderRadius: radius.md,
     overflow: "hidden",
-    shadowColor: "#000",
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.08,
     shadowRadius: 4,
@@ -63,25 +67,24 @@ const styles = StyleSheet.create({
   thumbnail: {
     width: "100%",
     height: CARD_WIDTH,
-    backgroundColor: "#F3E8D8",
+    backgroundColor: colors.border,
   },
   info: {
-    padding: 10,
+    padding: spacing.sm + 2,
   },
   caption: {
-    fontSize: 14,
-    color: "#1F2937",
+    ...typography.bodySmall,
+    color: colors.text,
     lineHeight: 18,
-    marginBottom: 4,
+    marginBottom: spacing.xs,
   },
   date: {
-    fontSize: 12,
-    color: "#9CA3AF",
+    ...typography.label,
+    color: colors.textSecondary,
   },
   aiTag: {
-    fontSize: 10,
-    color: "#D97706",
-    fontWeight: "700",
-    marginTop: 4,
+    ...typography.tag,
+    color: colors.accent,
+    marginTop: spacing.xs,
   },
 });

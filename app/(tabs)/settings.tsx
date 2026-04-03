@@ -13,6 +13,7 @@ import {
 import Constants from "expo-constants";
 import { Ionicons } from "@expo/vector-icons";
 import { useStore } from "../../lib/store";
+import { colors, spacing, radius, typography } from "../../constants/theme";
 import {
   scheduleDailyReminder,
   cancelDailyReminder,
@@ -103,8 +104,8 @@ export default function SettingsScreen() {
               <Switch
                 value={settings.reminderEnabled}
                 onValueChange={toggleReminder}
-                trackColor={{ true: "#D97706", false: "#E5E7EB" }}
-                thumbColor={Platform.OS === "android" ? "#fff" : undefined}
+                trackColor={{ true: colors.accent, false: "#E5E7EB" }}
+                thumbColor={Platform.OS === "android" ? colors.white : undefined}
               />
             }
           />
@@ -150,7 +151,7 @@ export default function SettingsScreen() {
               )
             }
             right={
-              <Ionicons name="open-outline" size={16} color="#9CA3AF" />
+              <Ionicons name="open-outline" size={16} color={colors.textSecondary} />
             }
           />
           <Row
@@ -161,7 +162,7 @@ export default function SettingsScreen() {
               )
             }
             right={
-              <Ionicons name="open-outline" size={16} color="#9CA3AF" />
+              <Ionicons name="open-outline" size={16} color={colors.textSecondary} />
             }
           />
         </Section>
@@ -171,56 +172,55 @@ export default function SettingsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#FFFBF5" },
-  scroll: { paddingBottom: 40 },
+  container: { flex: 1, backgroundColor: colors.background },
+  scroll: { paddingBottom: spacing.xxxl },
   header: {
-    fontSize: 28,
-    fontWeight: "700",
-    color: "#1F2937",
-    paddingHorizontal: 16,
-    paddingTop: 8,
-    paddingBottom: 20,
+    ...typography.h1,
+    color: colors.text,
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.sm,
+    paddingBottom: spacing.xl,
   },
   section: { marginBottom: 24 },
   sectionTitle: {
-    fontSize: 13,
+    ...typography.caption,
     fontWeight: "600",
-    color: "#9CA3AF",
+    color: colors.textSecondary,
     textTransform: "uppercase",
     letterSpacing: 0.5,
-    paddingHorizontal: 16,
+    paddingHorizontal: spacing.lg,
     marginBottom: 6,
   },
   sectionContent: {
-    backgroundColor: "#fff",
-    marginHorizontal: 16,
-    borderRadius: 12,
+    backgroundColor: colors.surface,
+    marginHorizontal: spacing.lg,
+    borderRadius: radius.md,
     overflow: "hidden",
   },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 16,
+    paddingHorizontal: spacing.lg,
     paddingVertical: 14,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: "#F3E8D8",
+    borderBottomColor: colors.border,
   },
-  rowLabel: { fontSize: 16, color: "#1F2937", flex: 1 },
-  rowValue: { fontSize: 16, color: "#9CA3AF" },
+  rowLabel: { ...typography.body, color: colors.text, flex: 1 },
+  rowValue: { ...typography.body, color: colors.textSecondary },
   timePicker: {
     flexDirection: "row",
     flexWrap: "wrap",
-    padding: 12,
-    gap: 8,
+    padding: spacing.md,
+    gap: spacing.sm,
   },
   timeOption: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
-    backgroundColor: "#F9F5EB",
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    borderRadius: radius.sm,
+    backgroundColor: colors.surfaceAlt,
   },
-  timeOptionActive: { backgroundColor: "#D97706" },
-  timeOptionText: { fontSize: 13, color: "#1F2937" },
-  timeOptionTextActive: { color: "#fff", fontWeight: "600" },
+  timeOptionActive: { backgroundColor: colors.accent },
+  timeOptionText: { ...typography.caption, color: colors.text },
+  timeOptionTextActive: { color: colors.white, fontWeight: "600" },
 });

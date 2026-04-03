@@ -1,5 +1,6 @@
 import { TouchableOpacity, StyleSheet, ViewStyle } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { colors, radius } from "../constants/theme";
 
 interface IconButtonProps {
   name: keyof typeof Ionicons.glyphMap;
@@ -13,7 +14,7 @@ interface IconButtonProps {
 export default function IconButton({
   name,
   size = 24,
-  color = "#1F2937",
+  color = colors.text,
   onPress,
   style,
   accessibilityLabel,
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
   button: {
     width: 44,
     height: 44,
-    borderRadius: 22,
+    borderRadius: radius.lg,
     justifyContent: "center",
     alignItems: "center",
   },
