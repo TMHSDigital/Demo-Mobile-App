@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
     borderRadius: radius.md,
   },
   buttonText: {
+    ...typography.body,
     color: colors.white,
     fontWeight: "600",
-    ...typography.body,
   },
 });

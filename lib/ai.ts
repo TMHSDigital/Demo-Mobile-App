@@ -1,4 +1,4 @@
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 
 const API_KEY = process.env.EXPO_PUBLIC_OPENAI_KEY;
 const API_URL = "https://api.openai.com/v1/chat/completions";

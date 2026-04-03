@@ -60,7 +60,7 @@ export default function CameraScreen() {
   if (!hasPermission) {
     return (
       <View style={styles.container}>
-        <Ionicons name="camera-off-outline" size={48} color={colors.textSecondary} />
+        <Ionicons name="camera-outline" size={48} color={colors.textSecondary} />
         <Text style={styles.message}>Camera access is required</Text>
       </View>
     );

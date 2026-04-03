@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   buttonText: {
+    ...typography.body,
     color: colors.white,
     fontWeight: "600",
-    ...typography.body,
   },
 });
