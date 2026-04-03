@@ -63,25 +63,30 @@ const initStyles = StyleSheet.create({
 function AppContent() {
   const [dbReady, setDbReady] = useState(false);
   const [initFailed, setInitFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const loadEntries = useStore((s) => s.loadEntries);
   const loadSettings = useStore((s) => s.loadSettings);
 
-  const init = async () => {
-    setInitFailed(false);
-    try {
-      await initDatabase();
-      await Promise.all([loadEntries(), loadSettings()]);
-      setDbReady(true);
-    } catch {
-      setInitFailed(true);
-    }
-  };
-
   useEffect(() => {
-    init();
-  }, [loadEntries, loadSettings]);
+    let cancelled = false;
+    setInitFailed(false);
+    setDbReady(false);
+    (async () => {
+      try {
+        await initDatabase();
+        await Promise.all([loadEntries(), loadSettings()]);
+        if (!cancelled) setDbReady(true);
+      } catch {
+        if (!cancelled) setInitFailed(true);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [loadEntries, loadSettings, attempt]);
 
-  if (initFailed) return <InitError onRetry={init} />;
+  if (initFailed)
+    return <InitError onRetry={() => setAttempt((a) => a + 1)} />;
   if (!dbReady) return <LoadingSkeleton />;
 
   return (

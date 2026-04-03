@@ -10,7 +10,7 @@ import { CameraView, CameraType, FlashMode } from "expo-camera";
 import Constants from "expo-constants";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "expo-router";
-import { colors, radius, spacing, typography } from "../../constants/theme";
+import { colors, radius, spacing } from "../../constants/theme";
 import { requestCameraPermission } from "../../lib/permissions";
 import PhotoPreview from "../../components/PhotoPreview";
 
@@ -42,7 +42,8 @@ export default function CameraScreen() {
         <Ionicons name="build-outline" size={48} color={colors.textSecondary} />
         <Text style={styles.message}>Camera requires a development build</Text>
         <Text style={styles.submessage}>
-          Run "npx expo run:ios" or "npx expo run:android" to test the camera.
+          Run &quot;npx expo run:ios&quot; or &quot;npx expo run:android&quot; to test the
+          camera.
         </Text>
       </View>
     );

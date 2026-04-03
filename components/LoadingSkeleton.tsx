@@ -22,7 +22,7 @@ export default function LoadingSkeleton() {
     );
     pulse.start();
     return () => pulse.stop();
-  }, []);
+  }, [opacity]);
 
   return (
     <View style={styles.container}>
